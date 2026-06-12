@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌐 OMNISCIE USSD WORLD ENCYCLOPEDIA - GOD MODE v9.9</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --bg-deep: #020208;
+            --bg-surface: #0b0b1e;
+            --border-neon: #00ffcc;
+            --neon-pink: #ff0055;
+            --neon-blue: #0099ff;
+            --neon-gold: #ffaa00;
+            --matrix-green: #00ff66;
+            --text-glow: 0 0 10px rgba(0, 255, 204, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Consolas', 'Fira Code', Monaco, monospace;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 2rem;
+            background-image: 
+                linear-gradient(rgba(16, 16, 32, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(16, 16, 32, 0.3) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Effet d'alerte militaire terminal */
+        .terminal-header {
+            border: 2px solid var(--border-neon);
+            background: var(--bg-surface);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.15);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal-header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--border-neon), var(--neon-gold));
+            animation: lineMove 4s linear infinite;
+        }
+
+        @keyframes lineMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #fff;
+            text-shadow: var(--text-glow);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-sub {
+            color: var(--matrix-green);
+            font-size: 1rem;
+            text-transform: uppercase;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* Super Panneau Interactif */
+        .control-deck {
+            background: rgba(11, 11, 30, 0.85);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 25px rgba(0, 153, 255, 0.15);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .search-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-row input {
+            flex-grow: 1;
+            background: #000;
+            border: 2px solid var(--neon-blue);
+            padding: 1.2rem;
+            color: var(--neon-blue);
+            font-size: 1.3rem;
+            border-radius: 6px;
+            text-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+        }
+
+        .search-row input:focus {
+            outline: none;
+            border-color: #fff;
+            box-shadow: 0 0 15px #fff;
+        }
+
+        .deck-filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .filter-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-cell label {
+            color: var(--neon-gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .filter-cell select, .action-btn {
+            background: #000;
+            border: 1px solid var(--neon-blue);
+            color: #fff;
+            padding: 0.9rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .filter-cell select:hover { border-color: var(--border-neon); }
+
+        .action-btn {
+            background: linear-gradient(135deg, var(--neon-pink), #aa0044);
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px var(--neon-pink);
+        }
+
+        /* Section Stats de l'Armée */
+        .live-bar {
+            background: #000;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .pulse-node {
+            width: 10px;
+            height: 10px;
+            background: var(--matrix-green);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--matrix-green);
+            margin-right: 0.5rem;
+        }
+
+        /* Grille des Cartes */
+        .encyclopedia-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .ussd-card {
+            background: #060612;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 1.8rem;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ussd-card:hover {
+            border-color: var(--border-neon);
+            box-shadow: 0 10px 25px rgba(0, 255, 204, 0.15);
+            transform: scale(1.02);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .class-badge {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.6rem;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+        .class-badge.kernel { background: var(--neon-pink); color: white; }
+        .class-badge.user { background: var(--matrix-green); color: black; }
+
+        .scope-title {
+            color: var(--neon-gold);
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .code-vault {
+            font-size: 2.3rem;
+            color: #fff;
+            background: rgba(0,0,0,0.5);
+            padding: 0.8rem;
+            border-radius: 4px;
+            border-right: 4px solid var(--neon-gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .copy-trigger {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.3);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.2s;
+        }
+        .copy-trigger:hover { color: var(--border-neon); }
+
+        .explanation {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #475569;
+        }
+
+        /* Boîte de Notification Système */
+        .matrix-toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: #000;
+            border: 2px solid var(--matrix-green);
+            color: var(--matrix-green);
+            padding: 1.2rem 2.5rem;
+            border-radius: 4px;
+            box-shadow: 0 0 20px var(--matrix-green);
+            font-weight: bold;
+            transform: translateY(200px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 99999;
+        }
+        .matrix-toast.active { transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            h1 { font-size: 1.8rem; }
+            .search-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Terminal Banner -->
+    <div class="terminal-header">
+        <h1>🌐 Omniscient USSD Encyclopedia</h1>
+        <div class="alert-sub"><span class="pulse-node"></span>BASE DE DONNÉES MONDIALE INJECTÉE — PRÊT POUR L'EXTRACTION</div>
+    </div>
+
+    <!-- Control Center -->
+    <div class="control-deck">
+        <div class="search-row">
+            <input type="text" id="globalEngineInput" placeholder="Requête globale (Ex : IMEI, Samsung, Qualcomm, Orange, Déblocage)...">
+        </div>
+
+        <div class="deck-filters">
+            <div class="filter-cell">
+                <label>Architecture Écosystème</label>
+                <select id="filterOS" onchange="runMatrixEngine()">
+                    <option value="all">Toutes les structures</option>
+                    <option value="android">Android Open Source Project (AOSP)</option>
+                    <option value="ios">Apple iOS Core</option>
+                </select>
+            </div>
+
+            <div class="filter-cell">
+                <label>Constructeurs & Socs</label>
+                <select id="filterScope" onchange="runMatrixEngine()">
+                    <option value="all">Tous les constructeurs / Puces</option>
+                    <option value="Universel">GSM Global / Non-affilié</option>
+                    <option value="Samsung">Samsung Galaxy Labs</option>
+                    <option value="Apple">Apple In-House</option>
+                    <option value="Xiaomi">Xiaomi / HyperOS Module</option>
+                    <option value="Huawei">Huawei / HiSilicon Kirin</option>
+                    <option value="Oppo">Oppo / Realme / OnePlus</option>
+                    <option value="Qualcomm">Qualcomm Snapdragon Hardware</option>
+                    <option value="MediaTek">MediaTek (MTK) Engine</option>
+                    <option value="Opérateurs">Opérateurs Mobiles Mondiaux</option>
+                </select>
+            </div>
+
+            <div class="filter-cell">
+                <label>Niveau de Privilège</label>
+                <select id="filterPrivilege" onchange="runMatrixEngine()">
+                    <option value="all">Tous les privilèges</option>
+                    <option value="utility">Espace Utilisateur Standard</option>
+                    <option value="admin">Espace Noyau / Calibration Usine</option>
+                </select>
+            </div>
+
+            <div class="filter-cell">
+                <label>Outils Matrices</label>
+                <button class="action-btn" onclick="getRandomCommand()">Générer Aléatoire</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="live-bar">
+        <div><span class="pulse-node"></span>STATUT : SYSTEM OPERATIONAL</div>
+        <div id="counterLabel" style="color: var(--border-neon); font-weight: bold;">0 CODES PARCOURUS</div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="encyclopedia-grid" id="gridWrapper"></div>
+
+    <!-- Toast Notification -->
+    <div class="matrix-toast" id="systemNotification">COMMANDE EXPÉDIÉE VERS LE PRESSE-PAPIER.</div>
+
+    <script>
+        // LE DICTIONNAIRE MONDIAL ULTIME ET ETENDU (REAL CODES)
+        const giantDatabase = [
+            // UNIVERSELS / STANDARDS GSM MONDE
+            { code: "*#06#", desc: "Affiche le numéro de série d'identification unique mondial IMEI du modem cellulaire embarqué.", type: "utility", os: ["android", "ios"], scope: "Universel GSM" },
+            { code: "*#21#", desc: "Vérifie l'état d'activation et le ciblage réseau de toutes les formes de transfert de données (Voix, SMS, Data).", type: "utility", os: ["android", "ios"], scope: "Universel GSM" },
+            { code: "##002#", desc: "Code de forçage universel supprimant de manière irréversible tous les renvois d'appels configurés sur la ligne.", type: "utility", os: ["android", "ios"], scope: "Universel GSM" },
+            { code: "#31#", desc: "Masquage d'identité à la volée. Désactive la présentation du numéro pour l'appel immédiatement sortant.", type: "utility", os: ["android", "ios"], scope: "Universel GSM" },
+            { code: "*43#", desc: "Configure l'activation du service réseau de double appel (Notification d'appel en attente).", type: "utility", os: ["android", "ios"], scope: "Universel GSM" },
+            { code: "#43#", desc: "Désactive la gestion des appels en attente simultanés au niveau de la ligne réseau.", type: "utility", os: ["android", "ios"], scope: "Universel GSM" },
+            { code: "*#61#", desc: "Affiche le délai d'attente précis en secondes configuré avant le basculement vers le répondeur.", type: "utility", os: ["android", "ios"], scope: "Universel GSM" },
+            { code: "*#62#", desc: "Identifie le numéro d'acheminement de secours de l'opérateur lorsque l'appareil n'accroche aucun signal.", type: "utility", os: ["android", "ios"], scope: "Universel GSM" },
+            { code: "*#33#", desc: "Interroge la carte SIM pour lister les interdictions d'appels sortants appliquées au profil client.", type: "admin", os: ["android", "ios"], scope: "Universel GSM" },
+
+            // APPLE CORP (iOS CORE)
+            { code: "*3001#12345#*", desc: "Exécute l'application interne cachée 'Field Test Mode'. Fournit les statistiques physiques de l'antenne, l'ID de la cellule de la tour télécom, et le niveau exact de réception du signal RF.", type: "admin", os: ["ios"], scope: "Apple In-House" },
+            { code: "*#5005*7672#", desc: "Extrait l'adresse brute du centre de services SMS de l'opérateur (SMSC) responsable de la transmission des messages texte.", type: "admin", os: ["ios"], scope: "Apple In-House" },
+            { code: "*#31#", desc: "Vérification du statut persistant de la fonction de masquage de ligne (Numéro masqué permanent ou non).", type: "utility", os: ["ios"], scope: "Apple In-House" },
+
+            // SAMSUNG GALAXY ECOSYSTEM
+            { code: "*#0*#", desc: "Ouvre le panneau de diagnostic de bas niveau. Permet de forcer des tests matériels sur la dalle AMOLED (Pixel mort), le capteur d'empreinte, les haut-parleurs, et le gyroscope.", type: "admin", os: ["android"], scope: "Samsung Galaxy Labs" },
+            { code: "*#1234#", desc: "Affiche les identifiants de versions logicielles sécurisées du micrologiciel Samsung : PDA, CSC, MODEM et BOOTLOADER.", type: "utility", os: ["android"], scope: "Samsung Galaxy Labs" },
+            { code: "*#0228#", desc: "Menu d'ingénierie 'Battery Status'. Affiche la tension exacte (Voltage), la température et l'état d'usure des cellules.", type: "admin", os: ["android"], scope: "Samsung Galaxy Labs" },
+            { code: "*#9900#", desc: "Ouvre le volet système SysDump. Utilisé pour purger les fichiers de dump de la mémoire vive (RAM) et nettoyer les logs Kernel volumineux.", type: "admin", os: ["android"], scope: "Samsung Galaxy Labs" },
+            { code: "*#0808#", desc: "Contrôle les configurations de routage matériel du port de charge USB (Commutation entre les protocoles MTP, ADB et MODEM).", type: "admin", os: ["android"], scope: "Samsung Galaxy Labs" },
+            { code: "*#2663#", desc: "Panneau de mise à jour forcée de la puce de l'écran tactile (TSP Firmware) et des touches sensitives.", type: "admin", os: ["android"], scope: "Samsung Galaxy Labs" },
+            { code: "*#9090#", desc: "Paramètres de diagnostic réseau avancés. Contrôle de la vitesse de transmission et du traçage RAM.", type: "admin", os: ["android"], scope: "Samsung Galaxy Labs" },
+
+            // ANDROID AOSP GENERIC
+            { code: "*#*#4636#*#*", desc: "Le menu secret de diagnostic natif Android. Historique d'utilisation des processus, informations Wi-Fi brutes et basculement forcé des types de bandes (5G Only, LTE/UMTS).", type: "admin", os: ["android"], scope: "Android Open Source Project (AOSP)" },
+            { code: "*#*#7780#*#*", desc: "Commande de réinitialisation logicielle immédiate. Supprime le stockage des applications et les comptes synchronisés sans effacer les médias.", type: "admin", os: ["android"], scope: "Android Open Source Project (AOSP)" },
+            { code: "*#*#232339#*#*", desc: "Force l'exécution d'un protocole d'auto-test d'intégrité sur les pilotes de la carte réseau sans-fil WLAN.", type: "admin", os: ["android"], scope: "Android Open Source Project (AOSP)" },
+            { code: "*#*#1472365#*#*", desc: "Déclenche une boucle d'acquisition satellite forcée pour évaluer la réactivité du récepteur GPS intégré.", type: "admin", os: ["android"], scope: "Android Open Source Project (AOSP)" },
+            { code: "*#*#34971539#*#*", desc: "Expose l'intégralité des configurations d'usine, composants et versions firmware des capteurs photographiques installés.", type: "admin", os: ["android"], scope: "Android Open Source Project (AOSP)" },
+
+            // HARDWARE SOCS (QUALCOMM / MEDIATEK)
+            { code: "*#*#3646633#*#*", desc: "Accès au monumental 'MTK Engineer Mode'. Permet de modifier le gain du microphone audio, de configurer les bandes de fréquences LTE et d'analyser le processeur MediaTek.", type: "admin", os: ["android"], scope: "MediaTek (MTK) Engine" },
+            { code: "*#*#4636#*#*", desc: "Utilisé sur l'architecture Qualcomm Snapdragon pour forcer la modulation du modem vers des configurations réseau strictes.", type: "admin", os: ["android"], scope: "Qualcomm Snapdragon Hardware" },
+
+            // BBK ELECTRONICS (OPPO, REALME, ONEPLUS, VIVO)
+            { code: "*#800#", desc: "Ouvre le hub de feedback et de journalisation d'ingénierie officiel d'Oppo, Realme et OnePlus. Permet de capturer les bugs système en temps réel.", type: "admin", os: ["android"], scope: "Oppo / Realme / OnePlus" },
+            { code: "*#888#", desc: "Affiche la version matérielle précise du PCB (carte mère) du smartphone pour le service après-vente Oppo.", type: "admin", os: ["android"], scope: "Oppo / Realme / OnePlus" },
+            { code: "*#6776#", desc: "Donne la révision complète du logiciel d'exploitation ColorOS / RealmeUI installé avec les signatures OTA.", type: "utility", os: ["android"], scope: "Oppo / Realme / OnePlus" },
+
+            // HUAWEI & HONOR
+            { code: "*#*#2846579#*#*", desc: "Accède au 'ProjectMenu' de Huawei. Permet d'initier des restaurations via carte SD externe, de surveiller la température de la puce Kirin et d'ajuster les profils de charge.", type: "admin", os: ["android"], scope: "Huawei / HiSilicon Kirin" },
+
+            // OPERATEURS ET CONSOLE CLIENT
+            { code: "*123#", desc: "Commande standard de consultation du solde de minutes d'appels et du volume de gigaoctets internet restants.", type: "utility", os: ["android", "ios"], scope: "Opérateurs Mobiles Mondiaux" },
+            { code: "#123#", desc: "Redirige vers le panneau d'administration interactif de la ligne téléphonique pour l'activation d'options de roaming.", type: "utility", os: ["android", "ios"], scope: "Opérateurs Mobiles Mondiaux" },
+            { code: "*100#", desc: "Requête réseau demandant le renvoi immédiat par SMS de votre propre identifiant de ligne (Numéro de téléphone).", type: "utility", os: ["android", "ios"], scope: "Opérateurs Mobiles Mondiaux" }
+        ];
+
+        function renderEngine(data) {
+            const wrapper = document.getElementById('gridWrapper');
+            wrapper.innerHTML = '';
+
+            document.getElementById('counterLabel').textContent = `${data.length} CODES CHARGÉS EN MÉMOIRE`;
+
+            if (data.length === 0) {
+                wrapper.innerHTML = `<div style="grid-column: 1/-1; text-align: center; font-size: 1.2rem; border: 2px dashed var(--neon-pink); padding: 3rem; color: var(--neon-pink);">[ ALERTE : AUCUNE CORRESPONDANCE MATRICIELLE TROUVÉE ]</div>`;
+                return;
+            }
+
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'ussd-card';
+
+                let osBadges = '';
+                if(item.os.includes('android')) osBadges += '<i class="fa-brands fa-android" style="color:var(--matrix-green); margin-left:0.5rem;" title="Android System"></i>';
+                if(item.os.includes('ios')) osBadges += '<i class="fa-brands fa-apple" style="color:#fff; margin-left:0.5rem;" title="iOS Kernel"></i>';
+
+                card.innerHTML = `
+                    <div class="card-top">
+                        <span class="class-badge ${item.type === 'admin' ? 'kernel' : 'user'}">${item.type === 'admin' ? 'SYSTEM NOYAU' : 'ESPACE UTILISATEUR'}</span>
+                        <span class="scope-title">// ${item.scope}</span>
+                    </div>
+                    <div class="code-vault">
+                        <span>${item.code}</span>
+                        <button class="copy-trigger" onclick="executeCopy('${item.code}')"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                    <div class="explanation">${item.desc}</div>
+                    <div class="card-meta">
+                        <span>OCTETS : ${item.code.length * 8} bits</span>
+                        <div>${osBadges}</div>
+                    </div>
+                `;
+                wrapper.appendChild(card);
+            });
+        }
+
+        function runMatrixEngine() {
+            let compiledList = [...giantDatabase];
+            const query = document.getElementById('globalEngineInput').value.toLowerCase().trim();
+            const osFilter = document.getElementById('filterOS').value;
+            const scopeFilter = document.getElementById('filterScope').value;
+            const privilegeFilter = document.getElementById('filterPrivilege').value;
+
+            if (osFilter !== 'all') {
+                compiledList = compiledList.filter(item => item.os.includes(osFilter));
+            }
+
+            if (scopeFilter !== 'all') {
+                compiledList = compiledList.filter(item => item.scope.includes(scopeFilter));
+            }
+
+            if (privilegeFilter !== 'all') {
+                compiledList = compiledList.filter(item => item.type === privilegeFilter);
+            }
+
+            if (query) {
+                compiledList = compiledList.filter(item => 
+                    item.code.toLowerCase().includes(query) ||
+                    item.desc.toLowerCase().includes(query) ||
+                    item.scope.toLowerCase().includes(query)
+                );
+            }
+
+            renderEngine(compiledList);
+        }
+
+        function getRandomCommand() {
+            const rand = Math.floor(Math.random() * giantDatabase.length);
+            document.getElementById('globalEngineInput').value = giantDatabase[rand].code;
+            runMatrixEngine();
+        }
+
+        function executeCopy(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('systemNotification');
+                toast.classList.add('active');
+                setTimeout(() => toast.classList.remove('active'), 2000);
+            });
+        }
+
+        document.getElementById('globalEngineInput').addEventListener('input', runMatrixEngine);
+
+        // Initial Boot
+        runMatrixEngine();
+    </script>
+</body>
+</html>
